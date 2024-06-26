@@ -1,0 +1,25 @@
+[Wed Jun 26 17:31:53 2024] 
+hello!
+[Wed Jun 26 17:31:54 2024] 
+hello!
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/threading.py", line 916, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.6/threading.py", line 864, in run
+    self._target(*self._args, **self._kwargs)
+  File "/opt/uoj/judger/judge_client", line 66, in socket_server_loop
+    s.bind(('', jconf['socket_port']))
+OSError: [Errno 98] Address already in use
+
+[Wed Jun 26 17:31:56 2024] 
+Traceback (most recent call last):
+  File "/opt/uoj/judger/judge_client", line 433, in <module>
+    main()
+  File "/opt/uoj/judger/judge_client", line 403, in main
+    start_judger_server()
+  File "/opt/uoj/judger/judge_client", line 102, in start_judger_server
+    judger_loop()
+  File "/opt/uoj/judger/judge_client", line 366, in judger_loop
+    raise Exception('socket server exited unexpectedly')
+Exception: socket server exited unexpectedly
