@@ -6,7 +6,7 @@ Route::pattern('contest_id', '[1-9][0-9]{0,9}');
 Route::pattern('tab', '\S{1,20}');
 Route::pattern('rand_str_id', '[0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]{20}');
 Route::pattern('upgrade_name', '[a-zA-Z0-9_]{1,50}');
-Route::pattern('uid', '[\w]{1,}');
+Route::pattern('uid', '[\w-]{1,}');
 
 
 Route::group([
@@ -20,7 +20,7 @@ Route::group([
 		Route::any('/problem/{id}/manage/statement', '/problem_statement_manage.php');
 		Route::any('/problem/{id}/manage/managers', '/problem_managers_manage.php');
 		Route::any('/problem/{id}/manage/data', '/problem_data_manage.php');
-		
+
 		Route::any('/submit/{id}/{uid}', '/uidsubmit.php');
 		
 		Route::any('/contests', '/contests.php');
