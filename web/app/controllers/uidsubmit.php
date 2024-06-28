@@ -49,11 +49,12 @@
 	$problem_extra_config = getProblemExtraConfig($problem);
 	$custom_test_requirement = getProblemCustomTestRequirement($problem);
 
-	if ($custom_test_requirement && Auth::check()) {
-		$custom_test_submission = DB::selectFirst("select * from custom_test_submissions where submitter = '".Auth::id()."' and problem_id = {$problem['id']} order by id desc limit 1");
+	$uid = $_GET["uid"];
+	if ($custom_test_requirement) {
+		$custom_test_submission = DB::selectFirst("select * from custom_test_submissions where submitter = '".$uid."' and problem_id = {$problem['id']} order by id desc limit 1");
 		$custom_test_submission_result = json_decode($custom_test_submission['result'], true);
 	}
-	if ($custom_test_requirement && $_GET['get'] == 'custom-test-status-details' && Auth::check()) {
+	if ($custom_test_requirement && $_GET['get'] == 'custom-test-status-details') {
 		if ($custom_test_submission == null) {
 			echo json_encode(null);
 		} else if ($custom_test_submission['status'] != 'Judged') {
@@ -285,8 +286,10 @@ $('#contest-countdown').countdown(<?= $contest['end_time']->getTimestamp() - UOJ
 		<?php $answer_form->printHTML(); ?>
 	</div>
 	<?php if ($custom_test_requirement): ?>
+	<h6 class="row col-sm-12">
+        这里是在线运行功能，可以在第一个框内输入代码，第二个框写入运行的输入数据，点击提交即可运行。如果显示为绿色的success，说明代码可以运行，但是不保证答案正确。点击Tustom Test即可看到运行结果或输出数据。
+        </h6>
 	<div class="tab-pane" id="tab-custom-test">
-233
 		<div class="top-buffer-sm"></div>
 		<?php $custom_test_form->printHTML(); ?>
 	</div>

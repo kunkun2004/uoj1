@@ -1,10 +1,9 @@
 score 0
-time 11
-memory 8364
+time 79
+memory 35484
 details
 <tests>
-<custom-test info="Success" time="11" memory="8364">
-<out>3
-</out>
+<custom-test info="Runtime Error" time="79" memory="35484">
+<out></out>
 </custom-test>
 </tests>
