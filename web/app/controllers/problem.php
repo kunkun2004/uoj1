@@ -117,7 +117,7 @@
  	}
 	function handleCustomTestUpload($zip_file_name, $content, $tot_size) {
 		global $problem, $contest, $myUser;
-		
+		$uid = $_GET["uid"];	
 		$content['config'][] = array('problem_id', $problem['id']);
 		$content['config'][] = array('custom_test', 'on');
 		$esc_content = DB::escape(json_encode($content));
@@ -138,7 +138,7 @@
 		$result['status'] = "Waiting";
 		$result_json = json_encode($result);
 		
-		DB::insert("insert into custom_test_submissions (problem_id, submit_time, submitter, content, status, result) values ({$problem['id']}, now(), '{$myUser['username']}', '$esc_content', '{$result['status']}', '$result_json')");
+		DB::insert("insert into custom_test_submissions (problem_id, submit_time, submitter, content, status, result) values ({$problem['id']}, now(), $uid, '$esc_content', '{$result['status']}', '$result_json')");
  	}
 	
 	if ($can_use_zip_upload) {

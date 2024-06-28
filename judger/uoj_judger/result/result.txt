@@ -1,10 +1,9 @@
 score 0
-time 1
-memory 3440
+time 0
+memory 1588
 details
 <tests>
-<custom-test info="Success" time="1" memory="3440">
-<out>2
-</out>
+<custom-test info="Success" time="0" memory="1588">
+<out>Hello, World!</out>
 </custom-test>
 </tests>

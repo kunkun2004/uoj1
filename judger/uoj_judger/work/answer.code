@@ -1,47 +1,7 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <sstream>
-#include <functional>
-#include <algorithm>
-using namespace std;
-class LongestPath {
-public:
-    int findLongestPath(vector<int> &parent, string &s) {
-        int n = parent.size();
-        vector<vector<int>> g(n);
-        for (int i = 1; i < n; ++i)
-            g[parent[i]].push_back(i);
-        int ans = 0;
-        function<int(int)> dfs = [&](int x) -> int {
-            int maxLen = 0;
-            for (int y : g[x]) {
-                int len = dfs(y) + 1;
-                if (s[y] != s[x]) {
-                    ans = max(ans, maxLen + len);
-                    maxLen = max(maxLen, len);
-                }
-            }
-            return maxLen;
-        };
-        dfs(0);
-        return ans + 1;
-    }
-};
-int main() {
-    LongestPath solution;
-    int n;
-    string inputLine;
-    getline(cin, inputLine);
-    stringstream ss(inputLine);
-    ss >> n;
-    vector<int> parent(n);
-    for (int i = 0; i < n; ++i) {
-        ss >> parent[i];
-    }
-    string s;
-    ss >> s;
-    int result = solution.findLongestPath(parent, s);
-    cout << result << endl;
-    return 0;
+#include <stdio.h>
+int main()
+{
+   // printf() 中字符串需要引号
+   printf("Hello, World!");
+   return 0;
 }

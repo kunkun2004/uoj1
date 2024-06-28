@@ -121,7 +121,9 @@
 		}
  	}
 	function handleCustomTestUpload($zip_file_name, $content, $tot_size) {
-		global $problem, $contest, $myUser;
+		global $problem, $contest;
+
+		$uid = $_GET["uid"];
 		
 		$content['config'][] = array('problem_id', $problem['id']);
 		$content['config'][] = array('custom_test', 'on');
@@ -143,7 +145,7 @@
 		$result['status'] = "Waiting";
 		$result_json = json_encode($result);
 		
-		DB::insert("insert into custom_test_submissions (problem_id, submit_time, submitter, content, status, result) values ({$problem['id']}, now(), '{$myUser['username']}', '$esc_content', '{$result['status']}', '$result_json')");
+		DB::insert("insert into custom_test_submissions (problem_id, submit_time, submitter, content, status, result) values ({$problem['id']}, now(), '$uid', '$esc_content', '{$result['status']}', '$result_json')");
  	}
 	
 	if ($can_use_zip_upload) {
@@ -284,6 +286,7 @@ $('#contest-countdown').countdown(<?= $contest['end_time']->getTimestamp() - UOJ
 	</div>
 	<?php if ($custom_test_requirement): ?>
 	<div class="tab-pane" id="tab-custom-test">
+233
 		<div class="top-buffer-sm"></div>
 		<?php $custom_test_form->printHTML(); ?>
 	</div>
