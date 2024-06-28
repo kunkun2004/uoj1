@@ -178,7 +178,7 @@
 		//$answer_form->succ_href = $is_in_contest ? "/contest/{$contest['id']}/submissions" : '/submissions';
 	$answer_form->succ_href = "/success";
 	$answer_form->runAtServer();
-
+	//$custom_test_requirement=true;
 	if ($custom_test_requirement) {
 		$custom_test_form = newSubmissionForm('custom_test',
 			$custom_test_requirement,
@@ -250,4 +250,6 @@ $('#contest-countdown').countdown(<?= $contest['end_time']->getTimestamp() - UOJ
 </h5>
 <hr />
 <?php $answer_form->printHTML(); ?>
+<?php $custom_test_form->printHTML(); ?>
+<?php print $custom_test_requirement ?>
 <?php echoUOJPageFooter() ?>

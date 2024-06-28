@@ -17,14 +17,13 @@
     </script>
 </head>
 <body>
-    <h1>This page will close in 3 seconds.</h1>
 <article>
 	<header>
 		<h2 class="page-header">提交成功!</h2>
 	</header>
 	<section>
 		<div>
-			您的代码已经成功提交！<hr />
+			您的代码已经成功提交！本窗口将在3秒后自动关闭。<hr />
 			<button class="btn btn-primary" onclick="history.back(-1);">返回</button>
 		</div>
 	</section>

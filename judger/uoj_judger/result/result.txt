@@ -1,36 +1,10 @@
 score 0
-time 0
-memory 0
+time 1
+memory 3440
 details
 <tests>
-<test num="1" score="0" info="Runtime Error" time="-1" memory="-1">
-<in>2 3 2 5 4
-</in>
-<out></out>
-<res></res>
-</test>
-<test num="2" score="0" info="Runtime Error" time="-1" memory="-1">
-<in>3 1 1 2 2 3 3
-</in>
-<out></out>
-<res></res>
-</test>
-<test num="3" score="0" info="Runtime Error" time="-1" memory="-1">
-<in>4 2 1 2 2 3 2 2 1
-</in>
-<out></out>
-<res></res>
-</test>
-<test num="4" score="0" info="Runtime Error" time="-1" memory="-1">
-<in>5 5 5 7 2 6 6 1 1 5 5
-</in>
-<out></out>
-<res></res>
-</test>
-<test num="5" score="0" info="Runtime Error" time="-1" memory="-1">
-<in>6 5 1 3 2 3 3 6 4 5 5 9 6
-</in>
-<out></out>
-<res></res>
-</test>
+<custom-test info="Success" time="1" memory="3440">
+<out>2
+</out>
+</custom-test>
 </tests>
