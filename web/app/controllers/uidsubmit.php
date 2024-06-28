@@ -244,12 +244,12 @@ $('#contest-countdown').countdown(<?= $contest['end_time']->getTimestamp() - UOJ
 <?php else: ?>
 <h2 class="page-header text-center">提交答案  <?= $problem['title'] ?></h2>
 <?php endif ?>
-<div class="top-buffer-sm"></div>
+<!-- <div class="top-buffer-sm"></div>
 <h5 class="row col-sm-12">
 	C语言请选择"C"，C++请选择"C++11"，java请选择"java11"，python请选择"python3"。交错语言可以重新提交，使用其他语言的提交将不计成绩。
 </h5>
 <hr />
-<?php $answer_form->printHTML(); ?>	
+	 -->
 
 
 
@@ -271,16 +271,15 @@ $('#contest-countdown').countdown(<?= $contest['end_time']->getTimestamp() - UOJ
 
 
 
-	<!-- <div class="tab-pane" id="tab-submit-answer">
+	<div class="tab-pane" id="tab-submit-answer">
 		<div class="top-buffer-sm"></div>
 		<h5 class="row col-sm-12">
 	C语言请选择"C"，C++请选择"C++11"，java请选择"java11"，python请选择"python3"。交错语言可以重新提交，使用其他语言的提交将不计成绩。
 		</h5>
-		<hr /> -->
+		<hr />
 		
 		
-		
-		
+	
 		<?php $answer_form->printHTML(); ?>
 	</div>
 	<?php if ($custom_test_requirement): ?>
