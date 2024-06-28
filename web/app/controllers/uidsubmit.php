@@ -1,7 +1,10 @@
 <?php
 	requirePHPLib('form');
 	requirePHPLib('judger');
-	
+	if(md5(md5($_GET['uid']))!=$_GET['token'])
+	{
+		become404Page();
+	}	
 	if (!validateUInt($_GET['id']) || !($problem = queryProblemBrief($_GET['id']))) {
 		become404Page();
 	}
@@ -36,11 +39,11 @@
 				$ban_in_contest = !isProblemVisibleToUser($problem, $myUser);
 			}
 		}
-	} else {
+	} /*else {
 		if (!isProblemVisibleToUser($problem, $myUser)) {
 			become404Page();
 		}
-	}
+		}*/
 
 	$submission_requirement = json_decode($problem['submission_requirement'], true);
 	$problem_extra_config = getProblemExtraConfig($problem);
@@ -85,6 +88,8 @@
 	
 	function handleUpload($zip_file_name, $content, $tot_size) {
 		global $problem, $contest, $myUser, $is_in_contest;
+
+		$uid = $_GET["uid"];
 		
 		$content['config'][] = array('problem_id', $problem['id']);
 		if ($is_in_contest && $contest['extra_config']["contest_type"]!='IOI' && !isset($contest['extra_config']["problem_{$problem['id']}"])) {
@@ -110,9 +115,9 @@
 		$result_json = json_encode($result);
 		
 		if ($is_in_contest) {
-			DB::query("insert into submissions (problem_id, contest_id, submit_time, submitter, content, language, tot_size, status, result, is_hidden) values (${problem['id']}, ${contest['id']}, now(), '${myUser['username']}', '$esc_content', '$esc_language', $tot_size, '${result['status']}', '$result_json', 0)");
+			DB::query("insert into submissions (problem_id, contest_id, submit_time, submitter, content, language, tot_size, status, result, is_hidden) values (${problem['id']}, ${contest['id']}, now(), '$uid', '$esc_content', '$esc_language', $tot_size, '${result['status']}', '$result_json', 0)");
 		} else {
-			DB::query("insert into submissions (problem_id, submit_time, submitter, content, language, tot_size, status, result, is_hidden) values (${problem['id']}, now(), '${myUser['username']}', '$esc_content', '$esc_language', $tot_size, '${result['status']}', '$result_json', {$problem['is_hidden']})");
+			DB::query("insert into submissions (problem_id, submit_time, submitter, content, language, tot_size, status, result, is_hidden) values (${problem['id']}, now(), '$uid', '$esc_content', '$esc_language', $tot_size, '${result['status']}', '$result_json', {$problem['is_hidden']})");
 		}
  	}
 	function handleCustomTestUpload($zip_file_name, $content, $tot_size) {
@@ -153,7 +158,8 @@
 			}
 			return '';
 		};
-		$zip_answer_form->succ_href = $is_in_contest ? "/contest/{$contest['id']}/submissions" : '/submissions';
+		//$zip_answer_form->succ_href = $is_in_contest ? "/contest/{$contest['id']}/submissions" : '/submissions';
+		$zip_answer_form->succ_href = "/success";
 		$zip_answer_form->runAtServer();
 	}
 	
@@ -161,6 +167,7 @@
 		$submission_requirement,
 		'uojRandAvaiableSubmissionFileName',
 		'handleUpload');
+	//$answer_form->addHidden("uid", $_GET["uid"], null, null);
 	$answer_form->extra_validator = function() {
 		global $ban_in_contest;
 		if ($ban_in_contest) {
@@ -168,7 +175,8 @@
 		}
 		return '';
 	};
-	$answer_form->succ_href = $is_in_contest ? "/contest/{$contest['id']}/submissions" : '/submissions';
+		//$answer_form->succ_href = $is_in_contest ? "/contest/{$contest['id']}/submissions" : '/submissions';
+	$answer_form->succ_href = "/success";
 	$answer_form->runAtServer();
 
 	if ($custom_test_requirement) {
@@ -216,9 +224,9 @@ EOD
 	<span class="badge badge-secondary mr-1">时间限制:<?=$time_limit!=null?"$time_limit s":"N/A"?></span>
 	<span class="badge badge-secondary mr-1">空间限制:<?=$memory_limit!=null?"$memory_limit MB":"N/A"?></span>
 </div>
-<div class="float-right">
+<!--div class="float-right">
 	<?= getClickZanBlock('P', $problem['id'], $problem['zan']) ?>
-</div>
+</div-->
 
 <?php if ($contest): ?>
 <div class="page-header row">
@@ -234,41 +242,12 @@ $('#contest-countdown').countdown(<?= $contest['end_time']->getTimestamp() - UOJ
 </script>
 <?php endif ?>
 <?php else: ?>
-<h1 class="page-header text-center">#<?= $problem['id']?>. <?= $problem['title'] ?></h1>
-<a role="button" class="btn btn-info float-right" href="/problem/<?= $problem['id'] ?>/statistics"><span class="glyphicon glyphicon-stats"></span> <?= UOJLocale::get('problems::statistics') ?></a>
+<h2 class="page-header text-center">提交答案  <?= $problem['title'] ?></h2>
 <?php endif ?>
-
-<ul class="nav nav-tabs" role="tablist">
-	<li class="nav-item"><a class="nav-link active" href="#tab-statement" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-book"></span> <?= UOJLocale::get('problems::statement') ?></a></li>
-	<li class="nav-item"><a class="nav-link" href="#tab-submit-answer" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-upload"></span> <?= UOJLocale::get('problems::submit') ?></a></li>
-	<?php if ($custom_test_requirement): ?>
-	<li class="nav-item"><a class="nav-link" href="#tab-custom-test" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-console"></span> <?= UOJLocale::get('problems::custom test') ?></a></li>
-	<?php endif ?>
-	<?php if (hasProblemPermission($myUser, $problem)): ?>
-	<li class="nav-item"><a class="nav-link" href="/problem/<?= $problem['id'] ?>/manage/statement" role="tab"><?= UOJLocale::get('problems::manage') ?></a></li>
-	<?php endif ?>
-	<?php if ($contest): ?>
-	<li class="nav-item"><a class="nav-link" href="/contest/<?= $contest['id'] ?>" role="tab"><?= UOJLocale::get('contests::back to the contest') ?></a></li>
-	<?php endif ?>
-</ul>
-<div class="tab-content">
-	<div class="tab-pane active" id="tab-statement">
-		<article class="top-buffer-md"><?= $problem_content['statement'] ?></article>
-	</div>
-	<div class="tab-pane" id="tab-submit-answer">
-		<div class="top-buffer-sm"></div>
-		<?php if ($can_use_zip_upload): ?>
-		<?php $zip_answer_form->printHTML(); ?>
-		<hr />
-		<strong><?= UOJLocale::get('problems::or upload files one by one') ?><br /></strong>
-		<?php endif ?>
-		<?php $answer_form->printHTML(); ?>
-	</div>
-	<?php if ($custom_test_requirement): ?>
-	<div class="tab-pane" id="tab-custom-test">
-		<div class="top-buffer-sm"></div>
-		<?php $custom_test_form->printHTML(); ?>
-	</div>
-	<?php endif ?>
-</div>
+<div class="top-buffer-sm"></div>
+<h5 class="row col-sm-12">
+	C语言请选择"C"，C++请选择"C++11"，java请选择"java11"，python请选择"python3"。交错语言可以重新提交，使用其他语言的提交将不计成绩。
+</h5>
+<hr />
+<?php $answer_form->printHTML(); ?>
 <?php echoUOJPageFooter() ?>

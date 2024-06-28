@@ -479,7 +479,7 @@ EOD;
 		if (post_data != {}) {
 			post_data['check-{$this->form_name}'] = "";
 			$.ajax({
-				url : '${_SERVER['REQUEST_URI']}',
+				url : 'http://170.106.176.146${_SERVER['REQUEST_URI']}',
 				type : 'POST',
 				dataType : 'json',
 				async : false,
@@ -669,9 +669,9 @@ EOD;
 		$form->handle = function(&$vdata) use($form_name, $requirement, $zip_file_name_gen, $handle) {
 			global $myUser;
 			
-			if ($myUser == null) {
-				redirectToLogin();
-			}
+			//if ($myUser == null) {
+			//	redirectToLogin();
+			//}
 			
 			$tot_size = 0;
 			$zip_file_name = $zip_file_name_gen();

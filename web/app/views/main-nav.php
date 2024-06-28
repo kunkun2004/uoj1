@@ -1,9 +1,9 @@
-<div class="navbar navbar-light navbar-expand-md bg-light mb-4" role="navigation">
-	<a class="navbar-brand" href="<?= HTML::url('/') ?>"><?= UOJConfig::$data['profile']['oj-name-short'] ?></a>
-	<button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+<!--div class="navbar navbar-light navbar-expand-md bg-light mb-4" role="navigation"-->
+	<!--a class="navbar-brand" href="<?= HTML::url('/') ?>"><?= UOJConfig::$data['profile']['oj-name-short'] ?></a-->
+	<!--button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target=".navbar-collapse">
 		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	</button-->
+	<!-- div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="nav navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link" href="<?= HTML::url('/contests') ?>"><span class="glyphicon glyphicon-stats"></span> <?= UOJLocale::get('contests') ?></a></li>
 			<li class="nav-item"><a class="nav-link" href="<?= HTML::url('/problems') ?>"><span class="glyphicon glyphicon-list-alt"></span> <?= UOJLocale::get('problems') ?></a></li>
@@ -20,8 +20,8 @@
 				</div>
 			</div>
 		</form>
-	</div><!--/.nav-collapse -->
-</div>
+	</div--><!--/.nav-collapse -->
+<!--/div-->
 <script type="text/javascript">
 	var zan_link = '';
 	$('#form-search-problem').submit(function(e) {
