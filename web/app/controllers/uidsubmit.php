@@ -244,40 +244,37 @@ $('#contest-countdown').countdown(<?= $contest['end_time']->getTimestamp() - UOJ
 <?php else: ?>
 <h2 class="page-header text-center">提交答案  <?= $problem['title'] ?></h2>
 <?php endif ?>
-
-
 <div class="top-buffer-sm"></div>
 <h5 class="row col-sm-12">
 	C语言请选择"C"，C++请选择"C++11"，java请选择"java11"，python请选择"python3"。交错语言可以重新提交，使用其他语言的提交将不计成绩。
 </h5>
 <hr />
-<?php $answer_form->printHTML(); ?>
-
-<!-- <?php $custom_test_form->printHTML(); ?> -->
-<!-- <?php print $custom_test_requirement ?> -->
-
-
+<?php $answer_form->printHTML(); ?>	
 
 
 
 
 <ul class="nav nav-tabs" role="tablist">
+	<li class="nav-item"><a class="nav-link active" href="#tab-statement" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-book"></span> <?= UOJLocale::get('problems::statement') ?></a></li>
 	<li class="nav-item"><a class="nav-link" href="#tab-submit-answer" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-upload"></span> <?= UOJLocale::get('problems::submit') ?></a></li>
 	<?php if ($custom_test_requirement): ?>
 	<li class="nav-item"><a class="nav-link" href="#tab-custom-test" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-console"></span> <?= UOJLocale::get('problems::custom test') ?></a></li>
 	<?php endif ?>
-	
-
+	<?php if (hasProblemPermission($myUser, $problem)): ?>
+	<li class="nav-item"><a class="nav-link" href="/problem/<?= $problem['id'] ?>/manage/statement" role="tab"><?= UOJLocale::get('problems::manage') ?></a></li>
+	<?php endif ?>
+	<?php if ($contest): ?>
+	<li class="nav-item"><a class="nav-link" href="/contest/<?= $contest['id'] ?>" role="tab"><?= UOJLocale::get('contests::back to the contest') ?></a></li>
+	<?php endif ?>
 </ul>
 <div class="tab-content">
-
+<!--	<div class="tab-pane active" id="tab-statement">  -->
+<!--		<article class="top-buffer-md"><?= $problem_content['statement'] ?></article> -->
+<!--	</div>-->
 	<div class="tab-pane" id="tab-submit-answer">
 		<div class="top-buffer-sm"></div>
-
-		<h5 class="row col-sm-12">
-	C语言请选择"C"，C++请选择"C++11"，java请选择"java11"，python请选择"python3"。交错语言可以重新提交，使用其他语言的提交将不计成绩。
-		</h5>
-
+		<?php if ($can_use_zip_upload): ?>
+		<?php $zip_answer_form->printHTML(); ?>
 		<hr />
 		<strong><?= UOJLocale::get('problems::or upload files one by one') ?><br /></strong>
 		<?php endif ?>
@@ -290,6 +287,18 @@ $('#contest-countdown').countdown(<?= $contest['end_time']->getTimestamp() - UOJ
 	</div>
 	<?php endif ?>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
