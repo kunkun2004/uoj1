@@ -268,16 +268,16 @@ $('#contest-countdown').countdown(<?= $contest['end_time']->getTimestamp() - UOJ
 	<?php endif ?>
 </ul>
 <div class="tab-content">
-<!--	<div class="tab-pane active" id="tab-statement">  -->
-<!--		<article class="top-buffer-md"><?= $problem_content['statement'] ?></article> -->
-<!--	</div>-->
+
+
+
 	<div class="tab-pane" id="tab-submit-answer">
 		<div class="top-buffer-sm"></div>
-		<?php if ($can_use_zip_upload): ?>
-		<?php $zip_answer_form->printHTML(); ?>
-		<hr />
-		<strong><?= UOJLocale::get('problems::or upload files one by one') ?><br /></strong>
-		<?php endif ?>
+		
+		
+		
+		
+		
 		<?php $answer_form->printHTML(); ?>
 	</div>
 	<?php if ($custom_test_requirement): ?>
