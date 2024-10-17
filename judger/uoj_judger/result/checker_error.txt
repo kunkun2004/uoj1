@@ -1,0 +1,1 @@
+wrong answer 1st lines differ - expected: '请输入羊的数量:不同放牧方案的数量： 724', found: '请输入羊的数量: 不同放牧方案的数量: 0'

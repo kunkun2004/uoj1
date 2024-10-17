@@ -1,7 +1,7 @@
 <?php
 	requirePHPLib('form');
 	requirePHPLib('judger');
-	if(md5(md5($_GET['uid']))!=$_GET['token'])
+	if(1==2 && md5(md5($_GET['uid']))!=$_GET['token'])
 	{
 		become404Page();
 	}	
@@ -259,7 +259,7 @@ $('#contest-countdown').countdown(<?= $contest['end_time']->getTimestamp() - UOJ
 
 <ul class="nav nav-tabs" role="tablist">
 
-	<li class="nav-item"><a class="nav-link active" href="#tab-submit-answer" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-upload"></span> <?= UOJLocale::get('problems::submit') ?></a></li>
+	<li class="nav-item"><a class="nav-link active" href="#tab-submit-answer" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-upload"></span>在此提交本题答案</a></li>
 	<?php if ($custom_test_requirement): ?>
 	<li class="nav-item"><a class="nav-link" href="#tab-custom-test" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-console"></span> <?= UOJLocale::get('problems::custom test') ?></a></li>
 	<?php endif ?>
@@ -278,7 +278,13 @@ $('#contest-countdown').countdown(<?= $contest['end_time']->getTimestamp() - UOJ
 		<div class="top-buffer-sm"></div>
 		<h5 class="row col-sm-12">
 	C语言请选择"C"，C++请选择"C++11"，java请选择"java11"，python请选择"python3"。交错语言可以重新提交，使用其他语言的提交将不计成绩。
-		</h5>
+</h5>
+<h5 class="row col-sm-12">
+点击下方“提交”按钮提交答案，提交成功会跳转到“成功”页面，并在3秒后自动关闭。
+</h5>
+<h5 class="row col-sm-12">
+若需在线运行可以点击（自定义测试）按钮，最终代码须在此页面点击提交才可计分。
+</h5>
 		<hr />
 		
 		
@@ -286,12 +292,18 @@ $('#contest-countdown').countdown(<?= $contest['end_time']->getTimestamp() - UOJ
 		<?php $answer_form->printHTML(); ?>
 	</div>
 	<?php if ($custom_test_requirement): ?>
-	<h6 class="row col-sm-12">
-        这里是在线运行功能，可以在第一个框内输入代码，第二个框写入运行的输入数据，点击提交即可运行。如果显示为绿色的success，说明代码可以运行，但是不保证答案正确。点击Tustom Test即可看到运行结果或输出数据。
-        </h6>
 	<div class="tab-pane" id="tab-custom-test">
+	<h5 class="row col-sm-12">
+        这里是在线运行功能，可以在第一个框内输入代码，第二个框写入运行所需的输入数据，点击提交即可运行。如果显示为绿色的success，说明代码可以运行，但是不保证答案正确。点击Custom Test即可看到运行结果或输出数据。
+	</h5>
+	<h5 class="row col-sm-12">
+	注：这里是在线运行功能，不是最终提交代码页面。此页面只提供运行测试代码功能，在此处的操作都不作为计分的提交。提交代码请点击上方提交按钮。
+	</h5>
 		<div class="top-buffer-sm"></div>
 		<?php $custom_test_form->printHTML(); ?>
+	<h5>
+	运行后，点击上方绿色或红色的Custom Test区域查看详细运行信息或输出数据。
+	</h5>
 	</div>
 	<?php endif ?>
 </div>

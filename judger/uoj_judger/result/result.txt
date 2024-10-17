@@ -1,9 +1,41 @@
 score 0
-time 79
-memory 35484
+time 82
+memory 8500
 details
 <tests>
-<custom-test info="Runtime Error" time="79" memory="35484">
-<out></out>
-</custom-test>
+<test num="1" score="0" info="Wrong Answer" time="19" memory="8376">
+<in>1
+</in>
+<out>请输入羊的数量: 不同放牧方案的数量: 0
+</out>
+<res>wrong answer 1st lines differ - expected: '请输入羊的数量:不同放牧方案的数量： 1', ...</res>
+</test>
+<test num="2" score="0" info="Wrong Answer" time="17" memory="8444">
+<in>2
+</in>
+<out>请输入羊的数量: 不同放牧方案的数量: 0
+</out>
+<res>wrong answer 1st lines differ - expected: '请输入羊的数量:不同放牧方案的数量： 0', ...</res>
+</test>
+<test num="3" score="0" info="Wrong Answer" time="17" memory="8500">
+<in>3
+</in>
+<out>请输入羊的数量: 不同放牧方案的数量: 0
+</out>
+<res>wrong answer 1st lines differ - expected: '请输入羊的数量:不同放牧方案的数量： 0', ...</res>
+</test>
+<test num="4" score="0" info="Wrong Answer" time="11" memory="8484">
+<in>9
+</in>
+<out>请输入羊的数量: 不同放牧方案的数量: 0
+</out>
+<res>wrong answer 1st lines differ - expected: '请输入羊的数量:不同放牧方案的数量： 352'...</res>
+</test>
+<test num="5" score="0" info="Wrong Answer" time="18" memory="8396">
+<in>10
+</in>
+<out>请输入羊的数量: 不同放牧方案的数量: 0
+</out>
+<res>wrong answer 1st lines differ - expected: '请输入羊的数量:不同放牧方案的数量： 724'...</res>
+</test>
 </tests>

@@ -17,6 +17,13 @@
     </script>
 </head>
 <body>
+<?php
+	$currentDateTime = new DateTime();
+	$targetDateTime = new DateTime('2024-06-30 16:00:00');
+	$pystart = new DateTime('2024-06-30 16:30:00');
+	$pyend = new DateTime('2024-06-30 18:00:00');
+?>
+	<?php if (($currentDateTime < $targetDateTime)||($currentDateTime > $pystart && $currentDateTime < $pyend)) : ?>
 <article>
 	<header>
 		<h2 class="page-header">提交成功!</h2>
@@ -28,6 +35,19 @@
 		</div>
 	</section>
 </article>
+<?php else: ?>
+<article>
+        <header>
+                <h2 class="page-header">比赛已结束，提交失败!</h2>
+        </header>
+        <section>
+                <div>
+                        本窗口将在3秒后自动关闭。<hr />
+                        <button class="btn btn-primary" onclick="history.back(-1);">返回</button>
+                </div>
+        </section>
+</article>
+<?php endif ?>
 </body>
 </html>
 <?php echoUOJPageFooter() ?>
