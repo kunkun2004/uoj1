@@ -2,6 +2,11 @@
 	requirePHPLib('form');
 	requirePHPLib('judger');
 	requirePHPLib('data');
+
+	if (!isSuperUser($myUser))
+	{
+		become403Page();
+	}
 	
 	if (isSuperUser($myUser)) {
 		$new_problem_form = new UOJForm('new_problem');

@@ -14,7 +14,7 @@ Route::group([
 		'domain' => '('.UOJConfig::$data['web']['main']['host'].'|127.0.0.1'.')'
 	], function() {
 		//Route::any('/', '/index.php');
-	//	Route::any('/problems', '/problem_set.php');
+		Route::any('/problems', '/problem_set.php');
 		Route::any('/problems/template', '/problem_set.php?tab=template');
 		Route::any('/problem/{id}', '/problem.php');
 		Route::any('/problem/{id}/statistics', '/problem_statistics.php');
