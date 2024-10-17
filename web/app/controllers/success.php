@@ -18,12 +18,11 @@
 </head>
 <body>
 <?php
-	$currentDateTime = new DateTime();
-	$targetDateTime = new DateTime('2024-06-30 16:00:00');
-	$pystart = new DateTime('2024-06-30 16:30:00');
-	$pyend = new DateTime('2024-06-30 18:00:00');
+    $currentDateTime = new DateTime();
+    $starttime = new DateTime('2024-06-30 16:30:00');
+    $endtime = new DateTime('2024-06-30 18:00:00');
+    if ($currentDateTime > $starttime && $currentDateTime < $endtime) : 
 ?>
-	<?php if (($currentDateTime < $targetDateTime)||($currentDateTime > $pystart && $currentDateTime < $pyend)) : ?>
 <article>
 	<header>
 		<h2 class="page-header">提交成功!</h2>
