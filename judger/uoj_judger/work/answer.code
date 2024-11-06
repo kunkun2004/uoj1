@@ -1,24 +1,16 @@
-class Solution:
-    def __init__(self):
-        self.ans = 0
+dict = {}
 
-    def totalNCow(self, n: int) -> int:
-        pos = [0] * n
-        self.help(pos, n, 0)
-        return self.ans
-
-    def isValid(self, pos, row, col):
-        for i in range(row):
-            if pos[i] == col:
-                return False
-        
-    def help(self, pos, n, row):
-        pass
-        
-
-# 主程序
-if __name__ == "__main__":
-    solution = Solution()
-    n = int(input("请输入羊的数量: "))
-    result = solution.totalNCow(n)
-    print("不同放牧方案的数量:", result)
+def fun(num):
+	while num != 0:
+		a = num % 10
+		if a in dict:
+			dict[a] += 1
+		else:
+			dict[a] = 1
+		num //= 10
+		
+m, n = map(int, input().split())
+for i in range(m, n + 1):
+	fun(i)
+for key in sorted(dict):
+	print("%d:%d"%(key, dict[key]))

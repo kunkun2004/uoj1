@@ -206,7 +206,7 @@ EOD
 		};
 		$custom_test_form->ctrl_enter_submit = true;
 		$custom_test_form->setAjaxSubmit(<<<EOD
-function(response_text) {custom_test_onsubmit(response_text, $('#div-custom_test_result')[0], '{$_SERVER['REQUEST_URI']}&get=custom-test-status-details')}
+function(response_text) {custom_test_onsubmit(response_text, $('#div-custom_test_result')[0], '{$_SERVER['REQUEST_URI']}?get=custom-test-status-details')}
 EOD
 		);
 		$custom_test_form->submit_button_config['text'] = UOJLocale::get('problems::run');

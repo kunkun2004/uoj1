@@ -19,9 +19,15 @@
 <body>
 <?php
     $currentDateTime = new DateTime();
-    $starttime = new DateTime('2024-06-30 16:30:00');
-    $endtime = new DateTime('2024-06-30 18:00:00');
-    if ($currentDateTime > $starttime && $currentDateTime < $endtime) : 
+    $starttime1 = new DateTime('2024-10-26 16:00:00');
+    $starttime2 = new DateTime('2024-10-27 10:00:00');
+    $starttime3 = new DateTime('2024-10-27 14:00:00');
+    $starttime4 = new DateTime('2024-10-27 16:00:00');
+    $endtime1 = new DateTime('2024-10-26 17:30:00');
+    $endtime2 = new DateTime('2024-10-27 11:30:00');
+    $endtime3 = new DateTime('2024-10-27 15:30:00');
+    $endtime4 = new DateTime('2024-10-27 17:30:00');
+    if ($currentDateTime > $starttime1 && $currentDateTime < $endtime1 || $currentDateTime > $starttime2 && $currentDateTime < $endtime2 ||$currentDateTime > $starttime3 && $currentDateTime < $endtime3 ||$currentDateTime > $starttime4 && $currentDateTime < $endtime4) : 
 ?>
 <article>
 	<header>

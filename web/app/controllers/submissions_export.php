@@ -53,12 +53,36 @@
 		}
 
 		$res = DB::selectAll($query);
-		echo "submission id,problem id,uid,status,score,time,language\n";
+		$user_submissions = array();
+		echo "#,题目,用户,状态,得分,提交时间,语言,代码\n";
 		foreach ($res as $submission) {
+			$zip_file = new ZipArchive();
+			$submission_content = json_decode($submission['content'], true);
+			$zip_file->open(UOJContext::storagePath().$submission_content['file_name']);
+			$requirement = getProblemSubmissionRequirement(queryProblemBrief($submission['problem_id'])); 
+			$code = "";
+			foreach ($requirement as $req) {
+				if ($req['type'] == "source code") {
+					$code = $zip_file->getFromName("{$req['name']}.code");
+		                	$code = str_replace('"', '""', $code);
+				}
+			}
+			$submission["code"] = $code;
+			$zip_file->close();
 			$score = $submission['score'] ? $submission['score'] : 0;
-			echo $submission['id'].','.$submission['problem_id'].','.$submission['submitter'].','.$submission['result_error'].','.$score.','.$submission['submit_time'].','.$submission['language']."\n";
+			$submission['score'] = $score;
+			if (!array_key_exists($submission['submitter'], $user_submissions)) {
+				$user_submissions[$submission['submitter']] = array();
+			}
+			$user_submissions[$submission['submitter']][$submission['problem_id']] = $submission;
+			//echo $submission['id'].','.$submission['problem_id'].','.$submission['submitter'].','.$submission['result_error'].','.$score.','.$submission['submit_time'].','.$submission['language'].",\"".$code."\"\n";
 		}
-		//var_dump($res);
+		foreach ($user_submissions as $user_sub) {
+			foreach ($user_sub as $submission) {
+				echo $submission['id'].','.$submission['problem_id'].','.$submission['submitter'].','.$submission['result_error'].','.$submission['score'].','.$submission['submit_time'].','.$submission['language'].",\"".$submission["code"]."\"\n";
+			}
+		}
+		//var_dump($user_submissions);
 		
 		die();
 	}
